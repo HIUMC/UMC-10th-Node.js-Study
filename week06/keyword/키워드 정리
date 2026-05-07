@@ -1,0 +1,26 @@
+ORM(Object-Relational Mapping) : SQL을 직접 사용하는 대신, JavaScript/파이썬 등을 통해 쿼리를 만들고 실행하고 객체를 통해 DB에 접근할 수 있도록 도와주는 라이브러리 ← 유지보수, 가독성, 오류찾기 좋아짐
+- 대표 예시) Prisma
+
+DB 수동 작업 문제점 → 변경 사항 확인 어려움, 협업 시 문제 발생
+
+—> Prisma의 파일에 적힌 테이블 명세를 통해 생성/수정 
+
+Prisma의 Migrate 도구
+
+- npx Prisma migrate dev : 개발 과정에서 실행하는 도구, Schema 파일을 수정하고 이 도구를 실행하면, 자동으로 데이터베이스에 변경 사항을 반영하고, Migration 파일을 생성
+- npx Prisma migrate diploy : 나중에 한 번에 운영 환경에 데이터베이스 변경 사항을 적용할 때 실행하는 도구
+
+→ 장점 : Migration 파일들이 Git을 통해 같이 관리돼서 나중에 테이블의 변경 사항 확인 편리, Schema 파일만 작성해도 테이블이 자동으로 생성되고 반영되므로 개발 용이
+
+팀 프로젝트시)
+
+- 보통 `schema.prisma`와 `migrations/*`를 코드처럼 리뷰·버전 관리하고, 운영 반영은 `migrate deploy`만 사용.
+- 개발 DB는 필요 시 `reset`해도 되지만, 운영 DB는 절대 `reset`하지 않음.
+- `migrate dev` 는 반드시 Git에 커밋해서 다른 팀원들과 동기화.
+- 운영 환경에서는 `db push` , `reset` 사용을 지양.
+- 충돌 방지를 위해 PR에 `schema.prisma`와 `migrations/*`가 세트로 들어감.
+
+페이지네이션 ( ex. 커서 기반 페이지네이션, 오프셋 페이지네이션 등 )
+
+커서 기반 : 책갈피 같은 개념 (인덱스를 통해 바로 넘어감)
+오프셋 : 건너뛰는 방식 (결국 앞을 다 읽으며 넘겨서 느림)
