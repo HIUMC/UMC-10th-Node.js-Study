@@ -1,0 +1,1 @@
+[(week06)SQL 대신 ORM(Object-Relational Mapping, prisma) 사용해서 API 구현하기](https://github.com/alswn-03/UMC-10th-Node.js-Practice/issues/3)
